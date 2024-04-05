@@ -24,5 +24,6 @@ from accounts.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login_page,),
-    path('register/', register_page,)
+    path('register/', register_page,),
+    path('activate/<email_token>/' , activate_email , name="activate_email")
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

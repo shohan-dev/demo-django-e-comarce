@@ -59,6 +59,7 @@ def register_page(request):
         user_obj.save()
 
         messages.success(request, 'An email has been sent on your mail.')
+        
         return HttpResponseRedirect(request.path_info)
 
 

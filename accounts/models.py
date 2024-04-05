@@ -1,4 +1,5 @@
 
+from email.message import EmailMessage
 from django.db import models
 from django.contrib.auth.models import User
 from base.models import BaseModel
@@ -6,6 +7,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import uuid
 from base.emails import send_account_activation_email
+from django.core.mail import send_mail
+
 
 class Profile(BaseModel):
     user = models.OneToOneField(User , on_delete=models.CASCADE , related_name="profile")
@@ -23,6 +26,9 @@ def  send_email_token(sender , instance , created , **kwargs):
             Profile.objects.create(user = instance , email_token = email_token)
             email = instance.email
             send_account_activation_email(email , email_token)
+            
+        
+          
 
     except Exception as e:
         print(e)
