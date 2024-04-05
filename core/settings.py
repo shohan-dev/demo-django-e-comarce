@@ -15,7 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATE_DIR = os.path.join(BASE_DIR , 'templates')
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 
 # Quick-start development settings - unsuitable for production
@@ -47,7 +47,6 @@ EXTERNAL_APPS = [
     'accounts',
     'base',
     'products',
-
 ]
 # combine
 INSTALLED_APPS += EXTERNAL_APPS
@@ -128,17 +127,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'public/static')
+]
 
-STATICFILES_DIR = {
-    os.path.join(BASE_DIR , "public/static")
-}
-
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'public/static') 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'public/media')
 MEDIA_URL = '/media/'
 
 
@@ -148,7 +144,7 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
+# Email Settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
