@@ -1,8 +1,7 @@
-"""
-URL configuration for core project.
+"""ecomm URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+    https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -15,15 +14,30 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.conf import settings
+from django.urls import path , include
 from django.conf.urls.static import static
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from accounts.views import *
+from accounts.views import activate_email, login_page, register_page
+
 
 urlpatterns = [
+    path('' , include('home.urls') ),
+    path('product/' , include('products.urls') ),
+#     # path('accounts/' , include('accounts.urls') ),
+    path('login/' , login_page , name="login" ),
+    path('register/' , register_page , name="register"),
+    path('activate/<email_token>/' , activate_email , name="activate_email"),
     path('admin/', admin.site.urls),
-    path('login/', login_page,),
-    path('register/', register_page,),
-    path('activate/<email_token>/' , activate_email , name="activate_email")
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+   path('activate/<email_token>/' , activate_email , name="activate_email"),
+
+]
+
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
+
+    
+urlpatterns += staticfiles_urlpatterns()

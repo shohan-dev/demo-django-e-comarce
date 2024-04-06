@@ -10,6 +10,7 @@ class Category(BaseModel):
     category_image = models.ImageField(upload_to="catgories")
 
 
+    # Slug Create Field for Product
     def save(self , *args , **kwargs):
         self.slug = slugify(self.category_name)
         super(Category ,self).save(*args , **kwargs)
@@ -46,7 +47,7 @@ class Product(BaseModel):
     size_variant = models.ManyToManyField(SizeVariant , blank=True)
 
 
-    
+    # Slug Create Field for Product
     def save(self , *args , **kwargs):
         self.slug = slugify(self.product_name)
         super(Product ,self).save(*args , **kwargs)
